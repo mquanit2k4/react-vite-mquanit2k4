@@ -5,9 +5,19 @@
 import "./style.css";
 
 const MyComponent = () => {
+  // const QuanVM = "Vu Minh Quan"; // string
+  // const QuanVM = 20; // number
+  // const QuanVM = true; // boolean
+  // const QuanVM = null; // null
+  // const QuanVM = undefined; // undefined
+  // const QuanVM = [1, 2, 3]; // array
+  const QuanVM = {
+    name: "Vu Minh Quan",
+    age: 20,
+  };
   return (
     <>
-      <div> Vu Minh Quan SoICT-HUST </div> //tag
+      <div> {JSON.stringify(QuanVM)} Vu Minh Quan SoICT-HUST </div> //tag
       <div
         className="child"
         style={{
