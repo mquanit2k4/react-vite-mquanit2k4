@@ -4,13 +4,13 @@ const TodoNew = (props) => {
 
   // useState hook
   const [valueInput, setValueInput] = useState("Vu Minh Quan");
-
+  const { addNewTodo } = props;
   console.log(">>> check props", props);
   // const { addNewTodo } = props;
   // addNewTodo("Vu Minh Quan");
 
   const handleClick = () => {
-    alert(">>> Check value input: " + valueInput);
+    addNewTodo(valueInput);
   };
 
   const handlOnChange = (name) => {
