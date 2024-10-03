@@ -1,16 +1,19 @@
 const TodoData = (props) => {
 
-  // const {name, age, data} = props;
-  const name = props.name;
-  const age = props.age;
-  const data = props.data;
+  const {todoList} = props;
+  
 
-  console.log(">>> check props", props);
+  console.log(">>> check props", todoList);
   return (
     <div className="todo-data">
-      <div>My name is {props.name}</div>
-      <div>Learning React</div>
-      <div>Watching Video</div>
+      {todoList.map((todo => {
+        return (
+          <div className="todo-item" key={todo.id}>
+            <div> {todo.name} </div>
+            <button>Delete</button>
+          </div>
+        );
+      }))}
       <div>
         {JSON.stringify(props.todoList)}
       </div>
