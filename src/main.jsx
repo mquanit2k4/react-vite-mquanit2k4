@@ -1,10 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
+import LoginPage from './pages/login.jsx'
+import RegisterPage from './pages/register.jsx'
+import UserPage from './pages/user.jsx'
+import ProductPage from './pages/product.jsx'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import "./styles/global.css";
 
 const router = createBrowserRouter([
   {
@@ -13,19 +18,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <div>Login page</div>,
+    element: <LoginPage/>,
   },
   {
     path: "/register",
-    element: <div>Register page</div>,
+    element: <RegisterPage/>,
   },
   {
     path: "/users",
-    element: <div>Users page</div>,
+    element: <UserPage/>,
   },
   {
     path: "/products",
-    element: <div>Products page</div>,
+    element: <ProductPage/>,
   }
 ]);
 
@@ -33,4 +38,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>,
-)
+);
