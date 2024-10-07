@@ -45,7 +45,8 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // Strict Mode trong react lam code chay 2 lan
+  // <React.StrictMode> 
     <RouterProvider router={router} />
-  </React.StrictMode>,
+  // </React.StrictMode>,
 );
