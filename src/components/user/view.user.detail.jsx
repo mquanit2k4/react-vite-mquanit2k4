@@ -1,15 +1,28 @@
-import { Button, Drawer } from "antd";
+import {  Drawer } from "antd";
+import { useState } from "react";
 
 const ViewUserDetail = (props) => {
     const { isDetailOpen, setIsDetailOpen, dataDetail, setDataDetail } = props;
+
+    const [selectedFile, setSelectedFile] = useState(null)
+    const [preview, setPreview] = useState(null)
+
     const handleOnChangeFile = (event) => {
         if (!event.target.files || event.target.files.length === 0) {
+            setSelectedFile(null);
+            setPreview(null);
             return;
         }
+        const file = event.target.files[0];
+        if(file) {
+            setSelectedFile(file);
+            setPreview(URL.createObjectURL(file));
 
+        } 
         // I've kept this example simple by using the first image instead of multiple
-        handleOnChangeFile(event.target.files[0])
+        
     }
+    console.log(">>> check file: ", preview)
     return (
         <Drawer 
         width = {"40vw"}
@@ -36,7 +49,7 @@ const ViewUserDetail = (props) => {
                 width: "150px",
                 border: "1px solid #ccc",
             }}>
-                <img height={100} width={150} src={`${import.meta.env.VITE_BACKEND_URL}/images/avatar/${dataDetail.avatar}`}></img>
+                <img style={{ height: "100%", width: "100%", objectFit: "contain"}} src={`${import.meta.env.VITE_BACKEND_URL}/images/avatar/${dataDetail.avatar}`}></img>
             </div>
             <div>
                 <label htmlFor="btnUpload" style={{
@@ -49,9 +62,16 @@ const ViewUserDetail = (props) => {
                     cursor: "pointer"
                 }}
                 >Upload Avatar</label>
-                <input type='file' id="btnUpload" hidden onChange={handleOnChangeFile}></input>
+                <input type='file' id="btnUpload" hidden onChange={(event) => handleOnChangeFile(event)}></input>
             </div>
-            {/* <Button type='primary'>Upload Avatar</Button> */}
+            {preview  && <div style={{
+                marginTop: "10px",
+                height: "100px",
+                width: "150px",
+                border: "1px solid #ccc",
+            }}>
+                <img style={{ height: "100%", width: "100%", objectFit: "contain"}} src={preview}></img>
+            </div>}
         </> 
             :
             <>
