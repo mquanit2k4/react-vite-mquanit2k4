@@ -29,4 +29,8 @@ const fetchAllUserAPI = () => {
     const URL_BACKEND = `/api/v1/user/${id}`;
     return axios.delete(URL_BACKEND);
   };
-export { createUserAPI, updateUserAPI, fetchAllUserAPI, deleteUserAPI };
+
+  const handleUploadFile = (file, folder) => {
+    
+  }
+export { createUserAPI, updateUserAPI, fetchAllUserAPI, deleteUserAPI, handleUploadFile };

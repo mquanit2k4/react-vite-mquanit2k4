@@ -1,4 +1,4 @@
-import {  Drawer } from "antd";
+import {  Button, Drawer } from "antd";
 import { useState } from "react";
 
 const ViewUserDetail = (props) => {
@@ -21,6 +21,12 @@ const ViewUserDetail = (props) => {
         } 
         // I've kept this example simple by using the first image instead of multiple
         
+    }
+    const handleUpdateUserAvatar = () => {
+        // upload file
+
+
+        // update user avatar
     }
     console.log(">>> check file: ", preview)
     return (
@@ -64,14 +70,19 @@ const ViewUserDetail = (props) => {
                 >Upload Avatar</label>
                 <input type='file' id="btnUpload" hidden onChange={(event) => handleOnChangeFile(event)}></input>
             </div>
-            {preview  && <div style={{
+            {preview  &&
+            <>
+            <div style={{
                 marginTop: "10px",
                 height: "100px",
                 width: "150px",
-                border: "1px solid #ccc",
+                marginBottom: "15px",
             }}>
                 <img style={{ height: "100%", width: "100%", objectFit: "contain"}} src={preview}></img>
-            </div>}
+            </div>
+            <Button type="primary"
+            onClick={() => handleUpdateUserAvatar()}>Save</Button>
+            </>}
         </> 
             :
             <>
