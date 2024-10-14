@@ -1,8 +1,9 @@
-import {  Button, Drawer } from "antd";
+import {  Button, Drawer, notification } from "antd";
 import { useState } from "react";
+import { handleUploadFile, updateUserAvatarAPI } from "../../services/api.service";
 
 const ViewUserDetail = (props) => {
-    const { isDetailOpen, setIsDetailOpen, dataDetail, setDataDetail } = props;
+    const { isDetailOpen, setIsDetailOpen, dataDetail, setDataDetail, loadUser } = props;
 
     const [selectedFile, setSelectedFile] = useState(null)
     const [preview, setPreview] = useState(null)
@@ -22,10 +23,36 @@ const ViewUserDetail = (props) => {
         // I've kept this example simple by using the first image instead of multiple
         
     }
-    const handleUpdateUserAvatar = () => {
+    const handleUpdateUserAvatar = async () => {
         // upload file
-
-
+        const resUpload = await handleUploadFile(selectedFile, "avatar");
+        if (resUpload.data) {
+            const newAvatar = resUpload.data.fileUploaded;
+            const resUpdateAvatar = await updateUserAvatarAPI(newAvatar, dataDetail._id, dataDetail.fullName, dataDetail.phone);
+            if (resUpdateAvatar.data) {
+                setIsDetailOpen(false);
+                setSelectedFile(null);
+                setPreview(null);
+                await loadUser();
+                notification.success({
+                    message: "Upload avatar sucess",
+                    description: "Cap nhat avatar thanh cong"
+                })
+            } else {
+                notification.error({
+                    message: "Error update user avatar",
+                    description: JSON.stringify(resUpdateAvatar.message)
+                })
+            }
+            console.log(">>> newAvatar: ", newAvatar)
+        } else {
+            //fail
+            notification.error({
+                message: "Upload avatar fail",
+                description: JSON.stringify(resUpload.message)
+            })
+        }
+        console.log(">>> resUpload: ", resUpload)
         // update user avatar
     }
     console.log(">>> check file: ", preview)
